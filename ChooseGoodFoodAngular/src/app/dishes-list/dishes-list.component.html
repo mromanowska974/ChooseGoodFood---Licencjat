@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <div class="search-bar-row">
       <input class="search-bar" placeholder="Szukaj..."/>
       <div class="button">
@@ -11,4 +11,4 @@
     <div *ngFor="let dish of restaurantDishes$ | async; let i = index">
       <app-dish-card [restaurantDish]="dish"></app-dish-card>
     </div>
-  </div>
+</div>

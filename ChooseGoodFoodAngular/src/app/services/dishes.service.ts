@@ -18,7 +18,9 @@ export class DishesService {
         portion: item.data()['portion'],
         price: item.data()['price'],
         glycemicIndex: item.data()['glycemic_index'],
-        homeDishId: item.data()['home_dish_id']
+        homeDishId: item.data()['home_dish_id'],
+        imageUrl: item.data()['image-url'],
+        imageCredits: item.data()['image-credits']
       }
     })))
   }
@@ -33,7 +35,9 @@ export class DishesService {
         portion: item.data()!['portion'],
         price: item.data()!['price'],
         glycemicIndex: item.data()!['glycemic_index'],
-        homeDishId: item.data()!['home_dish_id']
+        homeDishId: item.data()!['home_dish_id'],
+        imageUrl: item.data()!['image-url'],
+        imageCredits: item.data()!['image-credits']
       }
     }))
   }
@@ -47,7 +51,9 @@ export class DishesService {
         calories: item.data()!['calories'],
         portion: item.data()!['portion'],
         price: item.data()!['price'],
-        glycemicIndex: item.data()!['glycemic_index']
+        glycemicIndex: item.data()!['glycemic_index'],
+        imageUrl: item.data()!['image-url'],
+        imageCredits: item.data()!['image-credits']
       }
     }))
   }

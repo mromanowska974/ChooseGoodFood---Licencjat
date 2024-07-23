@@ -1,5 +1,7 @@
 <div class="container" (click)="navigateToDetails()">
-    <div class="image-box"></div>
+    <div class="image-box">
+      <img [src]='restaurantDish.imageUrl' width="80px" height="80px">
+    </div>
     <div class="content-box">
       <h2 class="dish-name">{{ restaurantDish.name }}</h2>
     </div>
