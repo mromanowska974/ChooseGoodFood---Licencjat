@@ -1,0 +1,14 @@
+<div>
+    <div class="search-bar-row">
+      <input class="search-bar" placeholder="Szukaj..."/>
+      <div class="button">
+        <button (click)="sort()">Sortuj</button>
+      </div>
+      <div class="button">
+        <button (click)="filter()">Filtruj</button>
+      </div>
+    </div>
+    <div *ngFor="let dish of restaurantDishes$ | async; let i = index">
+      <app-dish-card [restaurantDish]="dish"></app-dish-card>
+    </div>
+  </div>

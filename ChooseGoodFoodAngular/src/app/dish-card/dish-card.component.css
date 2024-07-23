@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #aaaaaa;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .image-box {
+    width: 80px;
+    height: 80px;
+    margin: 10px 10px 10px 10px;
+    background-color: #777777;
+  }
+  
+  .buttons-box {
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .button {
+    margin: 5px;
+    font-size: 40px;
+  }
+  
+  .content-box {
+    margin-top: 10px;
+    margin-left: -20px;
+  }
+  
+  .dish-name {
+    font-size: 20px;
+  }
+  
+  .category {
+    font-size: 10px;
+  }

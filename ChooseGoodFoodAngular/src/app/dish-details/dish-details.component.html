@@ -1,0 +1,30 @@
+<div>
+    <div class="image-box"></div>
+    <h2 class="dish-name">{{ dish.name }}</h2>
+    <div class="container">
+      <div class="content-box">
+        <p class="text">Składniki:</p>
+        
+        <div class="content-line">
+          <p class="text">Cena dania:</p>
+          <p class="text">{{ dish.price }} zł</p>
+        </div>
+        <div class="content-line">
+          <p class="text">Wartość kaloryczna:</p>
+          <p class="text">{{ dish.calories }} kcal</p>
+        </div>
+        <div class="content-line">
+          <p class="text">Indeks glikemiczny:</p>
+          <p class="text">{{ dish.glycemicIndex }}</p>
+        </div>
+        <div class="content-line">
+          <p class="text">Porcja: </p>
+          <p class="text">{{ dish.portion }} g</p>
+        </div>
+      </div>
+    </div>
+    <div class="button">
+      <button *ngIf="isAlternativeDetailsPage === true" (click)="navigateToComparison()">Porównaj</button>
+      <button *ngIf="isAlternativeDetailsPage === false" (click)="navigateToAlternativeDetails()">Pokaż zamiennik</button>
+    </div>
+  </div>
