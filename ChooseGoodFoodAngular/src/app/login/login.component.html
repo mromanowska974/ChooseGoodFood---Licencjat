@@ -1,0 +1,15 @@
+<div class="container">
+    <h1>Choose Good Food</h1>
+    <div class="input">
+        <label>E-mail</label>
+        <input type="email" #email>
+    </div>
+    <div class="input">
+        <label>Hasło</label>
+        <input type="password" #password>
+    </div>
+    <div class="btn-box">
+        <button (click)="onLogin(email.value, password.value)">Zaloguj się</button>
+        <button (click)="onRegister(email.value, password.value)">Zarejestruj się</button>
+    </div>
+</div>

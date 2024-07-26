@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Salsa';
+    src: url('./assets/fonts/Salsa/Salsa-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('./assets/fonts/Inter/static/Inter-Regular.ttf');
+}

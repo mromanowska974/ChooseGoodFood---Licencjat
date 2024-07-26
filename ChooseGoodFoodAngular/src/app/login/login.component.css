@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Inter';
+}
+
+h1 {
+    font-family: 'Salsa';
+    margin: 40px 0;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.btn-box {
+    margin: 40px 0;
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+}
