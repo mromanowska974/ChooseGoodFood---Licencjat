@@ -19,9 +19,9 @@ export class ComparisonPageComponent implements OnInit, OnDestroy {
   homeDish;
 
   ngOnInit(): void {
-     this.rSub = this.dishesService.getRestaurantDish(localStorage.getItem('restaurantDishId')!).subscribe(rDish => {
-      this.restaurantDish = rDish
-     })
+     this.dishesService.getRestaurantDish(localStorage.getItem('restaurantDishId')!).then(dish => {
+      this.restaurantDish = dish
+    })
 
      this.hSub = this.dishesService.getHomeDish(localStorage.getItem('homeDishId')!).subscribe(hDish => {
       this.homeDish = hDish
@@ -29,7 +29,6 @@ export class ComparisonPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-     this.rSub.unsubscribe();
      this.hSub.unsubscribe();
   }
 }

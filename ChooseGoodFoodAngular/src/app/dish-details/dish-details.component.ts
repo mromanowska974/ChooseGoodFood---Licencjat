@@ -3,6 +3,8 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DishesService } from '../services/dishes.service';
+import { RestaurantDish } from '../models/restaurant-dish';
+import { HomeDish } from '../models/home-dish';
 
 @Component({
   selector: 'app-dish-details',
@@ -26,14 +28,18 @@ export class DishDetailsComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.sub = this.route.queryParams.subscribe(params => {
       this.isAlternativeDetailsPage = params['isAlternative'] === 'true';
-      this.dishesService.getRestaurantDish(localStorage.getItem('restaurantDishId')!).subscribe(item => {
-        this.dish = item
-      })
+
       if(this.isAlternativeDetailsPage){
         console.log(this.isAlternativeDetailsPage)
         this.dishesService.getHomeDish(localStorage.getItem('homeDishId')!).subscribe(item => {
           this.dish = item
         })
+      }
+      else {
+        this.dishesService.getRestaurantDish(localStorage.getItem('restaurantDishId')!).then(dish => {
+          this.dish = dish!
+        })
+        console.log(this.dish)
       }
     });
   }
@@ -47,9 +53,9 @@ export class DishDetailsComponent implements OnInit, OnDestroy{
   }
 
   navigateToAlternativeDetails(): void {
-    localStorage.setItem('homeDishId', this.dish.homeDishId)
-    this.router.navigate(['/alternative-details'], { queryParams: { 
-      isAlternative: true,
-    }});
+      localStorage.setItem('homeDishId', this.dish.homeDishId)
+      this.router.navigate(['/alternative-details'], { queryParams: { 
+        isAlternative: true,
+      }});
   }
 }

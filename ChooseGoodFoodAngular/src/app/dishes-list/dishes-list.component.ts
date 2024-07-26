@@ -23,7 +23,7 @@ export class DishesListComponent {
   }
   
   sort(){
-
+    
   }
 
   filter(){
