@@ -6,6 +6,9 @@ import { ButtonDirective } from '../directives/button.directive';
 import { InputDirective } from '../directives/input.directive';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { RestaurantDish } from '../models/restaurant-dish';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-dishes-list',
@@ -22,19 +25,31 @@ import { Router } from '@angular/router';
 export class DishesListComponent {
   dishesService = inject(DishesService);
   loginService = inject(LoginService);
+  userService = inject(UserService);
   router = inject(Router);
 
-  restaurantDishes$ = this.dishesService.getRestaurantDishes();
+  dishes: RestaurantDish[];
+  fullList: RestaurantDish[];
+
+  listType = 'full';
+  loggedUser: User;
 
   ngOnInit(): void { 
-    
+    this.dishesService.getRestaurantDishes().then((dishes) => {
+      this.fullList = dishes;
+      this.dishes = this.fullList;
+    })
+
+    this.userService.loggedUser.subscribe(user => {
+      this.loggedUser = user
+    });
   }
   
-  sort(){
+  onSort(){
     
   }
 
-  filter(){
+  onFilter(){
 
   }
 
@@ -43,5 +58,17 @@ export class DishesListComponent {
       localStorage.removeItem('uid');
       this.router.navigate(['login'])
     })
+  }
+
+  onFavoritesList() {
+    if(this.listType === 'full'){
+      this.listType = 'favorites'
+      console.log(this.loggedUser)
+      this.dishes = this.loggedUser.favoritesDishes
+    }
+    else if (this.listType === 'favorites') {
+      this.listType = 'full';
+      this.dishes = this.fullList;
+    }
   }
 }

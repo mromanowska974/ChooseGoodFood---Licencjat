@@ -4,17 +4,24 @@
         <button appButton (click)="onLogOut()">Wyloguj się</button>
       </div>
       <div class="button">
-        <button appButton>Ulubione</button>
+        <button appButton (click)="onFavoritesList()">
+          {{
+            listType === 'full' ? 'Ulubione' : 'Wszystkie'
+          }}
+        </button>
       </div>
       <input appInput class="search-bar" placeholder="Szukaj..."/>
       <div class="button">
-        <button appButton mode="dark" (click)="sort()">Sortuj</button>
+        <button appButton mode="dark" (click)="onSort()">Sortuj</button>
       </div>
       <div class="button">
-        <button appButton mode="dark" (click)="filter()">Filtruj</button>
+        <button appButton mode="dark" (click)="onFilter()">Filtruj</button>
       </div>
     </div>
-    <div *ngFor="let dish of restaurantDishes$ | async; let i = index">
+    <p *ngIf="dishes.length === 0" class="emptyListMsg">
+      Lista dań jest pusta.
+    </p>
+    <div *ngFor="let dish of dishes; let i = index">
       <app-dish-card [restaurantDish]="dish"></app-dish-card>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="container" (click)="navigateToDetails()">
+<div class="container">
     <div class="image-box">
       <img [src]='restaurantDish.imageUrl' width="80px" height="80px">
     </div>
@@ -6,10 +6,12 @@
       <h2 class="dish-name">{{ restaurantDish.name }}</h2>
     </div>
     <div class="buttons-box">
-      <button title="Icon by Business and Online Icons on freeicons.io">
-        <img src="../assets/icons/star.svg">
+      <button title="Icon by Business and Online Icons on freeicons.io" (click)="checkAsFavorite()">
+        <img [src]="
+          isChecked ? '../assets/icons/full-star.svg' : '../assets/icons/star.svg'
+        " width="40px">
       </button>
-      <button title="Icon by Business and Online Icons on freeicons.io">
+      <button title="Icon by Business and Online Icons on freeicons.io" (click)="navigateToDetails()">
         <img src="../assets/icons/info.svg">
       </button>
     </div>

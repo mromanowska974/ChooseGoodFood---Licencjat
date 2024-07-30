@@ -6,7 +6,6 @@
     border-radius: 10px;
     color: purple;
     margin: 10px;
-    cursor: pointer;
   }
   
   .image-box {
@@ -32,6 +31,7 @@
     height: 50px;
     background-color: transparent;
     border: none;
+    cursor: pointer;
   }
   
   .content-box {

@@ -27,7 +27,7 @@ export class LoginComponent {
         this.setActiveUser({
           uid: user.id,
           email: user.data()!['email'],
-          favouriteDishes: user.data()!['favouriteDishes']
+          favoritesDishes: user.data()!['favoritesDishes']
         })
       })
     })
@@ -39,7 +39,7 @@ export class LoginComponent {
       this.userService.createUser({
         uid: data.user.uid,
         email: data.user.email,
-        favouriteDishes: []
+        favoriteDishes: []
       }).then(() => {
         this.setActiveUser(data.user)
       })
@@ -51,7 +51,7 @@ export class LoginComponent {
     let user = {
       uid: data.uid,
       email: data.email,
-      favouriteDishes: data.favouriteDishes ? data.favouriteDishes : []
+      favoritesDishes: data.favoritesDishes ? data.favoritesDishes : []
     }
 
     this.userService.setLoggedUser(user)

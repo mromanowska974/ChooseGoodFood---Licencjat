@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
+import { doc, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -25,7 +25,15 @@ export class UserService {
 
     return setDoc(docRef, {
       email: userData.email,
-      favouriteDishes: userData.favouriteDishes
+      favoritesDishes: userData.favoriteDishes
     });
+  }
+
+  updateFavoritesList(uid, newList){
+    const docRef = doc(this.firestore, 'users', uid);
+
+    return updateDoc(docRef, {
+      favoritesDishes: newList
+    })
   }
 }

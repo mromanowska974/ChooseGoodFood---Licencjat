@@ -18,3 +18,8 @@
   margin: 20px;
   font-family: 'Inter';
 }
+
+.emptyListMsg {
+  color: purple;
+  text-align: center;
+}
