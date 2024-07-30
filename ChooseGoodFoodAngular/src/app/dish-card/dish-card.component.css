@@ -1,7 +1,10 @@
   .container {
     display: flex;
     justify-content: space-between;
-    background-color: #aaaaaa;
+    background-color: transparent;
+    border: 3px solid purple;
+    border-radius: 10px;
+    color: purple;
     margin: 10px;
     cursor: pointer;
   }
@@ -23,6 +26,13 @@
     margin: 5px;
     font-size: 40px;
   }
+
+  button {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+  }
   
   .content-box {
     margin-top: 10px;
@@ -32,6 +42,7 @@
   
   .dish-name {
     font-size: 20px;
+    margin: 0;
   }
   
   .category {

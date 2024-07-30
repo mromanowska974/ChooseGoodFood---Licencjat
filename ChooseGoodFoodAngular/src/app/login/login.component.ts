@@ -2,12 +2,15 @@ import { Component, inject } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { ButtonDirective } from '../directives/button.directive';
+import { InputDirective } from '../directives/input.directive';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-
+    ButtonDirective,
+    InputDirective
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, doc, Firestore, getDoc } from '@angular/fire/firestore';
+import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -21,8 +21,11 @@ export class UserService {
   }
 
   createUser(userData){
-    const docRef = collection(this.firestore, 'users');
+    const docRef = doc(this.firestore, 'users', userData.uid);
 
-    return addDoc(docRef, userData);
+    return setDoc(docRef, {
+      email: userData.email,
+      favouriteDishes: userData.favouriteDishes
+    });
   }
 }

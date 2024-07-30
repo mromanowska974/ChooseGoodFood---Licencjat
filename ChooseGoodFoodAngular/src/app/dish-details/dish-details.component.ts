@@ -3,13 +3,13 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DishesService } from '../services/dishes.service';
-import { RestaurantDish } from '../models/restaurant-dish';
-import { HomeDish } from '../models/home-dish';
+import { ButtonDirective } from '../directives/button.directive';
 
 @Component({
   selector: 'app-dish-details',
   standalone: true,
   imports: [
+    ButtonDirective,
     CommonModule
   ],
   templateUrl: './dish-details.component.html',

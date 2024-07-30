@@ -1,14 +1,14 @@
   .container {
     display: flex;
-    flex-direction: column;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
+    color: purple;
   }
   
   .image-box {
     margin: 15px;
-    width: 100%;
-    max-width: 390px;
+    border: 5px solid purple;
+    border-radius: 20px;
   }
 
   .credits {
@@ -24,6 +24,13 @@
     width: 400px;
   }
   
+  .ingredients-box, .info-box {
+    border: 3px solid purple;
+    border-radius: 20px;
+    margin: 10px 0;
+    padding: 10px;
+  }
+
   .text {
     font-size: 17px;
   }
@@ -38,4 +45,33 @@
     display: flex;
     justify-content: center;
     margin: 20px;
+  }
+
+  @media (orientation: landscape){
+    .container {
+      justify-content: space-between;
+    }
+    .image-box {
+      height: 80vh;
+      width: 35%;
+      padding: 10px;
+    }
+
+    .image-box img {
+      width: 90%;
+    }
+
+    .content-box {
+      margin-right: 15%;
+    }
+  }
+
+  @media (orientation: portrait){
+    .container {
+      flex-direction: column;
+    }
+
+    .image-box {
+      padding: 30px;
+    }
   }

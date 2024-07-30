@@ -1,11 +1,17 @@
 <div class="container">
     <div class="search-bar-row">
-      <input class="search-bar" placeholder="Szukaj..."/>
       <div class="button">
-        <button (click)="sort()">Sortuj</button>
+        <button appButton (click)="onLogOut()">Wyloguj się</button>
       </div>
       <div class="button">
-        <button (click)="filter()">Filtruj</button>
+        <button appButton>Ulubione</button>
+      </div>
+      <input appInput class="search-bar" placeholder="Szukaj..."/>
+      <div class="button">
+        <button appButton mode="dark" (click)="sort()">Sortuj</button>
+      </div>
+      <div class="button">
+        <button appButton mode="dark" (click)="filter()">Filtruj</button>
       </div>
     </div>
     <div *ngFor="let dish of restaurantDishes$ | async; let i = index">
