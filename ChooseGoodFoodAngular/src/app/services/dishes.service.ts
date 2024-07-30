@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Firestore, getDocs, collection, doc, getDoc } from '@angular/fire/firestore';
-import { from } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,17 @@ export class DishesService {
   firestore = inject(Firestore)
 
   restaurantDishes = this.getRestaurantDishes().then(dishes => dishes);
+
+  currentRestaurantDish = new BehaviorSubject(null);
+  currentHomeDish = new BehaviorSubject(null);
+
+  setCurrentRestaurantDish(dish){
+    this.currentRestaurantDish.next(dish)
+  }
+
+  setCurrentHomeDish(dish){
+    this.currentHomeDish.next(dish)
+  }
 
   getRestaurantDishes() {
     const docRef = collection(this.firestore, 'restaurant_dish');
@@ -33,7 +44,7 @@ export class DishesService {
 
   getHomeDish(id: string) {
     const docRef = doc(this.firestore, 'home_dishes', id);
-    return from(getDoc(docRef).then(item => {
+    return getDoc(docRef).then(item => {
       return {
         id: item.id,
         name: item.data()!['name'],
@@ -44,6 +55,12 @@ export class DishesService {
         imageUrl: item.data()!['image-url'],
         imageCredits: item.data()!['image-credits']
       }
-    }))
+    })
+  }
+
+  getIngredients(dishId: string, dishType: string){
+    const collectionRef = collection(this.firestore, dishType, dishId, 'ingredients')
+
+    return getDocs(collectionRef).then(data => data.docs.map(dish => dish.data()))
   }
 }

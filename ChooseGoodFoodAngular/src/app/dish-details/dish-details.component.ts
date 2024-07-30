@@ -30,16 +30,24 @@ export class DishDetailsComponent implements OnInit, OnDestroy{
       this.isAlternativeDetailsPage = params['isAlternative'] === 'true';
 
       if(this.isAlternativeDetailsPage){
-        console.log(this.isAlternativeDetailsPage)
-        this.dishesService.getHomeDish(localStorage.getItem('homeDishId')!).subscribe(item => {
-          this.dish = item
+        this.dishesService.getHomeDish(localStorage.getItem('homeDishId')!).then(item => {
+          this.dish = item;
+          this.dishesService.getIngredients(this.dish.id, 'home_dishes').then(ingredients => {
+            this.dish.ingredients = ingredients;
+
+            this.dishesService.setCurrentHomeDish(this.dish);
+          })
         })
       }
       else {
         this.dishesService.getRestaurantDish(localStorage.getItem('restaurantDishId')!).then(dish => {
-          this.dish = dish!
+          this.dish = dish!;
+          this.dishesService.getIngredients(this.dish.id, 'restaurant_dish').then(ingredients => {
+            this.dish.ingredients = ingredients;
+
+            this.dishesService.setCurrentRestaurantDish(dish);
+          })
         })
-        console.log(this.dish)
       }
     });
   }

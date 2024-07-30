@@ -4,7 +4,18 @@
       <h2 class="dish-name">{{ homeDish.name }}</h2>
     </div>
     <p>Składniki</p>
-    <!-- tu będą listy składników -->
+    <div class="compare-box">
+      <ul>
+        <li *ngFor="let ingredient of restaurantDish.ingredients">
+          {{ ingredient.name +': '+ ingredient.portion }}
+        </li>
+      </ul>
+      <ul>
+        <li *ngFor="let ingredient of homeDish.ingredients">
+          {{ ingredient.name +': '+ ingredient.portion }}
+        </li>
+      </ul>
+    </div>
     <p>Cena dania</p>
     <div class="compare-box">
       <p>{{ restaurantDish.price }} zł</p>

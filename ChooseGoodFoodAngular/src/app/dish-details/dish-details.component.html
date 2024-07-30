@@ -8,6 +8,11 @@
       <h2 class="dish-name">{{ dish.name }}</h2>
         <div class="ingredients-box">
           <p class="text">Składniki:</p>
+          <ul>
+            <li *ngFor="let ingredient of dish.ingredients">
+              {{ ingredient.name +": "+ ingredient.portion}}
+            </li>
+          </ul>
         </div>
         
         <div class="info-box">

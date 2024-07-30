@@ -7,4 +7,5 @@ export class HomeDish {
     glycemicIndex: any;
     imageUrl: any;
     imageCredits: any;
+    ingredients?: any[];
 }

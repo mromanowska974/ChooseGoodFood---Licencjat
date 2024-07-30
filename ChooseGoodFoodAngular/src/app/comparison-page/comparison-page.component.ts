@@ -1,11 +1,14 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { DishesService } from '../services/dishes.service';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-comparison-page',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './comparison-page.component.html',
   styleUrl: './comparison-page.component.css'
 })
@@ -19,12 +22,12 @@ export class ComparisonPageComponent implements OnInit, OnDestroy {
   homeDish;
 
   ngOnInit(): void {
-     this.dishesService.getRestaurantDish(localStorage.getItem('restaurantDishId')!).then(dish => {
-      this.restaurantDish = dish
-    })
+     this.dishesService.currentRestaurantDish.subscribe(dish => {
+      this.restaurantDish = dish;
+     })
 
-     this.hSub = this.dishesService.getHomeDish(localStorage.getItem('homeDishId')!).subscribe(hDish => {
-      this.homeDish = hDish
+     this.hSub = this.dishesService.currentHomeDish.subscribe(dish => {
+      this.homeDish = dish;
      })
   }
 

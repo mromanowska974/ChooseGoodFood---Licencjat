@@ -35,6 +35,8 @@ export class DishesListComponent {
   loggedUser: User;
 
   ngOnInit(): void { 
+    localStorage.removeItem('homeDishId');
+    localStorage.removeItem('restaurantDishId');
     this.dishesService.getRestaurantDishes().then((dishes) => {
       this.fullList = dishes;
       this.dishes = this.fullList;

@@ -8,4 +8,5 @@ export class RestaurantDish {
     homeDishId: any;
     imageUrl: any;
     imageCredits: any;
+    ingredients?: any[];
 }
