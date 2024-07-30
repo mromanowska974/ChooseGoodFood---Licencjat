@@ -1,12 +1,12 @@
 export class RestaurantDish {
     id: string;
-    name: any;
-    calories: any;
-    portion: any;
-    price: any;
-    glycemicIndex: any;
-    homeDishId: any;
-    imageUrl: any;
-    imageCredits: any;
+    name: string;
+    calories: number;
+    portion: number;
+    price: number;
+    glycemicIndex: number;
+    homeDishId: string;
+    imageUrl: string;
+    imageCredits: string;
     ingredients?: any[];
 }

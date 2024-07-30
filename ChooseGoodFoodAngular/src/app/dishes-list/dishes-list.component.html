@@ -10,7 +10,13 @@
           }}
         </button>
       </div>
-      <input appInput class="search-bar" placeholder="Szukaj..."/>
+      <input 
+        appInput 
+        class="search-bar"
+        placeholder="Szukaj..."
+        [(ngModel)]="searchPhrase"
+        (ngModelChange)="onInputChange()"
+      />
       <div class="button">
         <button appButton mode="dark" (click)="onSort()">Sortuj</button>
       </div>

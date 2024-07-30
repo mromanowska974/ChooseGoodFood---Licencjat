@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { RestaurantDish } from '../models/restaurant-dish';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dishes-list',
@@ -17,7 +18,8 @@ import { User } from '../models/user';
     DishCardComponent,
     ButtonDirective,
     InputDirective,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   templateUrl: './dishes-list.component.html',
   styleUrl: './dishes-list.component.css'
@@ -33,6 +35,7 @@ export class DishesListComponent {
 
   listType = 'full';
   loggedUser: User;
+  searchPhrase: string = ''
 
   ngOnInit(): void { 
     localStorage.removeItem('homeDishId');
@@ -53,6 +56,17 @@ export class DishesListComponent {
 
   onFilter(){
 
+  }
+
+  onInputChange(){
+    console.log(this.searchPhrase);
+    let newList = this.dishes.filter(dish => dish.name.toLowerCase().includes(this.searchPhrase))
+
+    this.dishes = newList
+
+    if(this.searchPhrase === ''){
+      this.dishes = this.fullList
+    }
   }
 
   onLogOut(){
