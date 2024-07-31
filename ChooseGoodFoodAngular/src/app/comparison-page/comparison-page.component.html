@@ -19,16 +19,34 @@
     <p>Cena dania</p>
     <div class="compare-box">
       <p>{{ restaurantDish.price }} zł</p>
-      <p>{{ homeDish.price }} zł</p>
+      <p>
+        {{ homeDish.price }} zł 
+        <span [style]="{backgroundColor: compareValues.priceCompare >= 0 ? 'lightgreen' : '#ff9999'}">
+          {{ compareValues.priceCompare < 0 ? '+' : '-' }} 
+          {{ math.abs(compareValues.priceCompare.toFixed(4)*100) }}%
+        </span>
+      </p>
     </div>
     <p>Wartość kaloryczna</p>
     <div class="compare-box">
       <p>{{ restaurantDish.calories }} kcal</p>
-      <p>{{ homeDish.calories }} kcal</p>
+      <p>
+        {{ homeDish.calories }} kcal
+        <span [style]="{backgroundColor: compareValues.caloriesCompare >= 0 ? 'lightgreen' : '#ff9999'}">
+          {{ compareValues.caloriesCompare < 0 ? '+' : '-' }} 
+          {{ math.abs(compareValues.caloriesCompare.toFixed(4)*100) }}%
+        </span>
+      </p>
     </div>
     <p>Indeks glikemiczny</p>
     <div class="compare-box">
       <p>{{ restaurantDish.glycemicIndex }}</p>
-      <p>{{ homeDish.glycemicIndex }}</p>
+      <p>
+        {{ homeDish.glycemicIndex }}
+        <span [style]="{backgroundColor: compareValues.glycemicIndexCompare >= 0 ? 'lightgreen' : '#ff9999'}">
+          {{ compareValues.glycemicIndexCompare < 0 ? '+' : '-' }} 
+          {{ math.abs(compareValues.glycemicIndexCompare.toFixed(4)*100) }}%
+        </span>
+      </p>
     </div>
 </div>

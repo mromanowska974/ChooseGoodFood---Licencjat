@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ComparisonPageComponent implements OnInit, OnDestroy {
   dishesService = inject(DishesService);
+  math = Math;
 
   rSub: Subscription;
   hSub: Subscription;
@@ -21,17 +22,27 @@ export class ComparisonPageComponent implements OnInit, OnDestroy {
   restaurantDish;
   homeDish;
 
+  compareValues;
+
   ngOnInit(): void {
-     this.dishesService.currentRestaurantDish.subscribe(dish => {
+     this.rSub = this.dishesService.currentRestaurantDish.subscribe(dish => {
       this.restaurantDish = dish;
+
+      this.hSub = this.dishesService.currentHomeDish.subscribe(dish => {
+       this.homeDish = dish;
+       
+        this.compareValues = {
+          priceCompare: 1-(this.homeDish.price / this.restaurantDish.price),
+          caloriesCompare: 1-(this.homeDish.calories / this.restaurantDish.calories),
+          glycemicIndexCompare: 1-(this.homeDish.glycemicIndex / this.restaurantDish.glycemicIndex)
+        }
+      })
      })
 
-     this.hSub = this.dishesService.currentHomeDish.subscribe(dish => {
-      this.homeDish = dish;
-     })
   }
 
   ngOnDestroy(): void {
+     this.rSub.unsubscribe();
      this.hSub.unsubscribe();
   }
 }
