@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="criterion-box">
+        <div class="criterion">
+            <label>Cena</label>
+            <select appInput mode="dark" [(ngModel)]="priceFilter">
+                <option value="" #none1>Brak</option>
+                <option value="below">Poniżej</option>
+                <option value="above">Powyżej</option>
+                <option value="exact">Dokładnie</option>
+                <option value="fromTo" #fromTo1>Od .. do ..</option>
+            </select>
+            <div class="input-box" *ngIf="!none1.selected">
+                <input appInput mode="dark" type="number" [(ngModel)]="priceValues[0]">
+                <input appInput mode="dark" type="number" [(ngModel)]="priceValues[1]" *ngIf="fromTo1.selected">
+            </div>
+        </div>
+        <div class="criterion">
+            <label>Kalorie</label>
+            <select appInput mode="dark" [(ngModel)]="caloriesFilter">
+                <option value="" #none2>Brak</option>
+                <option value="below">Poniżej</option>
+                <option value="above">Powyżej</option>
+                <option value="exact">Dokładnie</option>
+                <option value="fromTo" #fromTo2>Od .. do ..</option>
+            </select>
+            <div class="input-box" *ngIf="!none2.selected">
+                <input appInput mode="dark" type="number" [(ngModel)]="caloriesValues[0]">
+                <input appInput mode="dark" type="number" [(ngModel)]="caloriesValues[1]" *ngIf="fromTo2.selected">
+            </div>
+        </div>
+        <div class="criterion">
+            <label>Indeks glikemiczny</label>
+            <select appInput mode="dark" [(ngModel)]="glycemicIndexFilter">
+                <option value="" #none3>Brak</option>
+                <option value="below">Poniżej</option>
+                <option value="above">Powyżej</option>
+                <option value="exact">Dokładnie</option>
+                <option value="fromTo" #fromTo3>Od .. do ..</option>
+            </select>
+            <div class="input-box" *ngIf="!none3.selected">
+                <input appInput mode="dark" type="number" [(ngModel)]="glycemicIndexValues[0]">
+                <input appInput mode="dark" type="number" [(ngModel)]="glycemicIndexValues[1]" *ngIf="fromTo3.selected">
+            </div>
+        </div>
+    </div>
+    <div class="btn-box">
+        <button appButton mode="dark" (click)="filter()">Filtruj</button>
+        <button appButton mode="dark" (click)="clear()">Czyść</button>
+        <button appButton mode="dark" (click)="cancel()">Anuluj</button>
+    </div>
+</div>

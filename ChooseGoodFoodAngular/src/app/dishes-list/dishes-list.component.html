@@ -28,8 +28,14 @@
       <app-sort-panel 
         *ngIf="sortMode"
         (criteria)="onSortCriteriaReceived($event)"
-        (sortCanceled)="onLeaveSortOrFilterMode()"
+        (sortCanceled)="onLeaveSortMode()"
       ></app-sort-panel>
+
+      <app-filter-panel 
+        *ngIf="filterMode"
+        (criteria)="onFilterCriteriaReceived($event)"
+        (filterCanceled)="onLeaveFilterMode()"
+      ></app-filter-panel>
     </div>
     <p *ngIf="dishes.length === 0" class="emptyListMsg">
       Lista dań jest pusta.

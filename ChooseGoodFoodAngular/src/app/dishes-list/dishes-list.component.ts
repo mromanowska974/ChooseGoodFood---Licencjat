@@ -11,6 +11,7 @@ import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { FormsModule } from '@angular/forms';
 import { SortPanelComponent } from "../sort-panel/sort-panel.component";
+import { FilterPanelComponent } from "../filter-panel/filter-panel.component";
 
 @Component({
   selector: 'app-dishes-list',
@@ -21,7 +22,8 @@ import { SortPanelComponent } from "../sort-panel/sort-panel.component";
     InputDirective,
     CommonModule,
     FormsModule,
-    SortPanelComponent
+    SortPanelComponent,
+    FilterPanelComponent
 ],
   templateUrl: './dishes-list.component.html',
   styleUrl: './dishes-list.component.css'
@@ -38,10 +40,10 @@ export class DishesListComponent {
 
   listType = 'full';
   sortMode = false;
-  filterMode = false;
+  filterMode = true;
   loggedUser: User;
   searchPhrase: string = ''
-  criteria: any;
+  sortCriteria: any;
 
   ngOnInit(): void { 
     localStorage.removeItem('homeDishId');
@@ -62,15 +64,15 @@ export class DishesListComponent {
   }
 
   onSortCriteriaReceived(event){
-    this.criteria = event;
+    this.sortCriteria = event;
 
     this.dishes = this.unsortedList.slice()
 
     this.dishes.sort((a, b) => {
-      return (this.criteria.nameSort === 'ascend' ? a.name.localeCompare(b.name) : -1* a.name.localeCompare(b.name))
-      || (this.criteria.priceSort === 'ascend' ? a.price - b.price : b.price - a.price)
-      || (this.criteria.caloriesSort === 'ascend' ? a.calories - b.calories : b.calories - a.calories)
-      || (this.criteria.glycemicIndexSort === 'ascend' ? a.glycemicIndex - b.glycemicIndex : b.glycemicIndex - a.glycemicIndex)
+      return (this.sortCriteria.nameSort === 'ascend' ? a.name.localeCompare(b.name) : -1* a.name.localeCompare(b.name))
+      || (this.sortCriteria.priceSort === 'ascend' ? a.price - b.price : b.price - a.price)
+      || (this.sortCriteria.caloriesSort === 'ascend' ? a.calories - b.calories : b.calories - a.calories)
+      || (this.sortCriteria.glycemicIndexSort === 'ascend' ? a.glycemicIndex - b.glycemicIndex : b.glycemicIndex - a.glycemicIndex)
       || 0;
     })
   }
@@ -79,8 +81,40 @@ export class DishesListComponent {
     this.filterMode = true;
   }
 
-  onLeaveSortOrFilterMode(){
+  onFilterCriteriaReceived(event){
+    console.log(event)
+
+    this.dishes = this.fullList.slice();
+
+    this.dishes =  this.dishes.filter(dish => {
+      return (event.priceFilter === 'above' ? dish.price > event.priceValues[0] 
+        : event.priceFilter === 'below' ? dish.price < event.priceValues[0]
+        : event.priceFilter === 'fromTo' ? dish.price > event.priceValues[0] && dish.price < event.priceValues[1]
+        : event.priceFilter === 'exact' ? dish.price === event.priceValues[0]
+        : 1
+      )
+    }).filter(dish => {
+      return (event.caloriesFilter === 'above' ? dish.calories > event.caloriesValues[0] 
+        : event.caloriesFilter === 'below' ? dish.calories < event.caloriesValues[0]
+        : event.caloriesFilter === 'fromTo' ? dish.calories > event.caloriesValues[0] && dish.calories < event.caloriesValues[1]
+        : event.caloriesFilter === 'exact' ? dish.calories === event.caloriesValues[0]
+        : 1
+      )
+    }).filter(dish => {
+      return (event.glycemicIndexFilter === 'above' ? dish.glycemicIndex > event.glycemicIndexValues[0] 
+        : event.glycemicIndexFilter === 'below' ? dish.glycemicIndex < event.glycemicIndexValues[0]
+        : event.glycemicIndexFilter === 'fromTo' ? dish.glycemicIndex > event.glycemicIndexValues[0] && dish.glycemicIndex < event.glycemicIndexValues[1]
+        : event.glycemicIndexFilter === 'exact' ? dish.glycemicIndex === event.glycemicIndexValues[0]
+        : 1
+      )
+    })
+  }
+
+  onLeaveSortMode(){
     this.sortMode = false;
+  }
+
+  onLeaveFilterMode(){
     this.filterMode = false;
   }
 
