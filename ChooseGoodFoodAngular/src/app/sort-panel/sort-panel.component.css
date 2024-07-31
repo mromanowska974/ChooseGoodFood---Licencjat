@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: purple;
+    color: white;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+.criterion-box {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.criterion {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.btn-box {
+    display: flex;
+    align-self: flex-end;
+    margin: 20px 20px 0 0;
+    width: 220px;
+    justify-content: space-evenly;
+}

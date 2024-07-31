@@ -18,11 +18,18 @@
         (ngModelChange)="onInputChange()"
       />
       <div class="button">
-        <button appButton mode="dark" (click)="onSort()">Sortuj</button>
+        <button appButton (click)="onSort()">Sortuj</button>
       </div>
       <div class="button">
-        <button appButton mode="dark" (click)="onFilter()">Filtruj</button>
+        <button appButton (click)="onFilter()">Filtruj</button>
       </div>
+    </div>
+    <div class="sort-or-filter" *ngIf="sortMode || filterMode">
+      <app-sort-panel 
+        *ngIf="sortMode"
+        (criteria)="onSortCriteriaReceived($event)"
+        (sortCanceled)="onLeaveSortOrFilterMode()"
+      ></app-sort-panel>
     </div>
     <p *ngIf="dishes.length === 0" class="emptyListMsg">
       Lista dań jest pusta.

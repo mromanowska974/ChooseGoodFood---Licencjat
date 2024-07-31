@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="criterion-box">
+        <div class="criterion">
+            <label>Nazwa</label>
+            <select appInput mode="dark" [(ngModel)]="nameSort">
+                <option value="">Brak</option>
+                <option value="ascend">Rosnąco</option>
+                <option value="descend">Malejąco</option>
+            </select>
+        </div>
+        <div class="criterion">
+            <label>Cena</label>
+            <select appInput mode="dark" [(ngModel)]="priceSort">
+                <option value="">Brak</option>
+                <option value="ascend">Rosnąco</option>
+                <option value="descend">Malejąco</option>
+            </select>
+        </div>
+        <div class="criterion">
+            <label>Kalorie</label>
+            <select appInput mode="dark" [(ngModel)]="caloriesSort">
+                <option value="">Brak</option>
+                <option value="ascend">Rosnąco</option>
+                <option value="descend">Malejąco</option>
+            </select>
+        </div>
+        <div class="criterion">
+            <label>Indeks glikemiczny</label>
+            <select appInput mode="dark" [(ngModel)]="glycemicIndexSort">
+                <option value="">Brak</option>
+                <option value="ascend">Rosnąco</option>
+                <option value="descend">Malejąco</option>
+            </select>
+        </div>
+    </div>
+    <div class="btn-box">
+        <button appButton mode="dark" (click)="sort()">Sortuj</button>
+        <button appButton mode="dark" (click)="clear()">Czyść</button>
+        <button appButton mode="dark" (click)="cancel()">Anuluj</button>
+    </div>
+</div>

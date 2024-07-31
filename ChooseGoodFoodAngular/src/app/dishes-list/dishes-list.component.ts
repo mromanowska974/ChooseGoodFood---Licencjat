@@ -10,6 +10,7 @@ import { RestaurantDish } from '../models/restaurant-dish';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { FormsModule } from '@angular/forms';
+import { SortPanelComponent } from "../sort-panel/sort-panel.component";
 
 @Component({
   selector: 'app-dishes-list',
@@ -19,8 +20,9 @@ import { FormsModule } from '@angular/forms';
     ButtonDirective,
     InputDirective,
     CommonModule,
-    FormsModule
-  ],
+    FormsModule,
+    SortPanelComponent
+],
   templateUrl: './dishes-list.component.html',
   styleUrl: './dishes-list.component.css'
 })
@@ -31,18 +33,23 @@ export class DishesListComponent {
   router = inject(Router);
 
   dishes: RestaurantDish[];
+  unsortedList: RestaurantDish[];
   fullList: RestaurantDish[];
 
   listType = 'full';
+  sortMode = false;
+  filterMode = false;
   loggedUser: User;
   searchPhrase: string = ''
+  criteria: any;
 
   ngOnInit(): void { 
     localStorage.removeItem('homeDishId');
     localStorage.removeItem('restaurantDishId');
     this.dishesService.getRestaurantDishes().then((dishes) => {
       this.fullList = dishes;
-      this.dishes = this.fullList;
+      this.dishes = this.fullList.slice();
+      this.unsortedList = this.fullList.slice();
     })
 
     this.userService.loggedUser.subscribe(user => {
@@ -51,11 +58,30 @@ export class DishesListComponent {
   }
   
   onSort(){
-    
+    this.sortMode = true;
+  }
+
+  onSortCriteriaReceived(event){
+    this.criteria = event;
+
+    this.dishes = this.unsortedList.slice()
+
+    this.dishes.sort((a, b) => {
+      return (this.criteria.nameSort === 'ascend' ? a.name.localeCompare(b.name) : -1* a.name.localeCompare(b.name))
+      || (this.criteria.priceSort === 'ascend' ? a.price - b.price : b.price - a.price)
+      || (this.criteria.caloriesSort === 'ascend' ? a.calories - b.calories : b.calories - a.calories)
+      || (this.criteria.glycemicIndexSort === 'ascend' ? a.glycemicIndex - b.glycemicIndex : b.glycemicIndex - a.glycemicIndex)
+      || 0;
+    })
   }
 
   onFilter(){
+    this.filterMode = true;
+  }
 
+  onLeaveSortOrFilterMode(){
+    this.sortMode = false;
+    this.filterMode = false;
   }
 
   onInputChange(){
@@ -77,6 +103,7 @@ export class DishesListComponent {
   }
 
   onFavoritesList() {
+    this.searchPhrase = ''
     if(this.listType === 'full'){
       this.listType = 'favorites'
       console.log(this.loggedUser)

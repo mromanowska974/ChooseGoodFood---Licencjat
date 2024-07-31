@@ -14,13 +14,14 @@ export class ButtonDirective implements OnInit {
 
       style.border = '2px solid purple';
       style.borderRadius = '10px';
-      style.backgroundColor = 'transparent';
+      style.backgroundColor = 'white';
       style.color = 'purple';
       style.height = '30px';
 
       if(this.mode==='dark'){
         style.backgroundColor = 'purple';
         style.color = 'white';
+        style.border = '2px solid white';
       }
   }
 }
