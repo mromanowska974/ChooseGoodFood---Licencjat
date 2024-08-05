@@ -33,7 +33,6 @@ export class AppComponent implements OnInit{
       if(localStorage.getItem('homeDishId') !== null){
         this.dishesService.getHomeDish(localStorage.getItem('homeDishId')!).then(dish => {
           this.dishesService.getIngredients(dish.id, 'home_dishes').then(ingredients => {
-            console.log('weszło')
             let homeDish: HomeDish = dish;
             homeDish.ingredients = ingredients
 
@@ -45,7 +44,6 @@ export class AppComponent implements OnInit{
       if(localStorage.getItem('restaurantDishId') !== null){
         this.dishesService.getRestaurantDish(localStorage.getItem('restaurantDishId')!).then(dish => {
           this.dishesService.getIngredients(dish!.id, 'restaurant_dish').then(ingredients => {
-            console.log('weszło')
             let restaurantDish: RestaurantDish = dish!;
             restaurantDish.ingredients = ingredients
 

@@ -18,12 +18,12 @@ import { FilterPanelComponent } from "../filter-panel/filter-panel.component";
   standalone: true,
   imports: [
     DishCardComponent,
+    SortPanelComponent,
+    FilterPanelComponent,
     ButtonDirective,
     InputDirective,
     CommonModule,
-    FormsModule,
-    SortPanelComponent,
-    FilterPanelComponent
+    FormsModule
 ],
   templateUrl: './dishes-list.component.html',
   styleUrl: './dishes-list.component.css'
@@ -40,10 +40,9 @@ export class DishesListComponent {
 
   listType = 'full';
   sortMode = false;
-  filterMode = true;
+  filterMode = false;
   loggedUser: User;
   searchPhrase: string = ''
-  sortCriteria: any;
 
   ngOnInit(): void { 
     localStorage.removeItem('homeDishId');
@@ -63,27 +62,23 @@ export class DishesListComponent {
     this.sortMode = true;
   }
 
+  onFilter(){
+    this.filterMode = true;
+  }
+  
   onSortCriteriaReceived(event){
-    this.sortCriteria = event;
-
     this.dishes = this.unsortedList.slice()
 
     this.dishes.sort((a, b) => {
-      return (this.sortCriteria.nameSort === 'ascend' ? a.name.localeCompare(b.name) : -1* a.name.localeCompare(b.name))
-      || (this.sortCriteria.priceSort === 'ascend' ? a.price - b.price : b.price - a.price)
-      || (this.sortCriteria.caloriesSort === 'ascend' ? a.calories - b.calories : b.calories - a.calories)
-      || (this.sortCriteria.glycemicIndexSort === 'ascend' ? a.glycemicIndex - b.glycemicIndex : b.glycemicIndex - a.glycemicIndex)
+      return (event.nameSort === 'ascend' ? a.name.localeCompare(b.name) : -1* a.name.localeCompare(b.name))
+      || (event.priceSort === 'ascend' ? a.price - b.price : b.price - a.price)
+      || (event.caloriesSort === 'ascend' ? a.calories - b.calories : b.calories - a.calories)
+      || (event.glycemicIndexSort === 'ascend' ? a.glycemicIndex - b.glycemicIndex : b.glycemicIndex - a.glycemicIndex)
       || 0;
     })
   }
 
-  onFilter(){
-    this.filterMode = true;
-  }
-
   onFilterCriteriaReceived(event){
-    console.log(event)
-
     this.dishes = this.fullList.slice();
 
     this.dishes =  this.dishes.filter(dish => {
@@ -119,13 +114,12 @@ export class DishesListComponent {
   }
 
   onInputChange(){
-    console.log(this.searchPhrase);
     let newList = this.dishes.filter(dish => dish.name.toLowerCase().includes(this.searchPhrase))
 
     this.dishes = newList
 
     if(this.searchPhrase === ''){
-      this.dishes = this.fullList
+      this.dishes = this.fullList.slice()
     }
   }
 
@@ -141,11 +135,11 @@ export class DishesListComponent {
     if(this.listType === 'full'){
       this.listType = 'favorites'
       console.log(this.loggedUser)
-      this.dishes = this.loggedUser.favoritesDishes
+      this.dishes = this.loggedUser.favoritesDishes.slice()
     }
     else if (this.listType === 'favorites') {
       this.listType = 'full';
-      this.dishes = this.fullList;
+      this.dishes = this.fullList.slice();
     }
   }
 }

@@ -23,7 +23,7 @@
         {{ homeDish.price }} zł 
         <span [style]="{backgroundColor: compareValues.priceCompare >= 0 ? 'lightgreen' : '#ff9999'}">
           {{ compareValues.priceCompare < 0 ? '+' : '-' }} 
-          {{ math.abs(compareValues.priceCompare.toFixed(4)*100) }}%
+          {{ math.abs(compareValues.priceCompare.toFixed(2)*100) }}%
         </span>
       </p>
     </div>

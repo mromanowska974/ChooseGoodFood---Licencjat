@@ -21,7 +21,6 @@ export class LoginComponent {
   router = inject(Router);
 
   onLogin(email, password){
-    console.log(email, ' ', password)
     this.loginService.login(email, password).then(data => {
       this.userService.getUser(data.user.uid).then(user => {
         this.setActiveUser({
@@ -34,7 +33,6 @@ export class LoginComponent {
   }
 
   onRegister(email, password){
-    console.log(email, ' ', password)
     this.loginService.register(email, password).then(data => {
       this.userService.createUser({
         uid: data.user.uid,

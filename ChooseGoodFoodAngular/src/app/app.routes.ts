@@ -8,7 +8,6 @@ export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent},
     { path: 'list', component: DishesListComponent },
-    { path: 'favourites', component: DishesListComponent },
     { path: 'details', component: DishDetailsComponent },
     { path: 'alternative-details', component: DishDetailsComponent },
     { path: 'comparison', component: ComparisonPageComponent },

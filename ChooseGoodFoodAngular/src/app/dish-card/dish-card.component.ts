@@ -23,8 +23,6 @@ export class DishCardComponent implements OnInit{
   ngOnInit(): void {
     this.userService.loggedUser.subscribe(user => {
       this.loggedUser = user;
-
-      console.log(user)
       
       if(this.loggedUser.favoritesDishes.find(dish => this.restaurantDish.id === dish.id)){
         this.isChecked = true;

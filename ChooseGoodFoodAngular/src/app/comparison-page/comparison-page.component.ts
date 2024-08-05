@@ -38,7 +38,6 @@ export class ComparisonPageComponent implements OnInit, OnDestroy {
         }
       })
      })
-
   }
 
   ngOnDestroy(): void {

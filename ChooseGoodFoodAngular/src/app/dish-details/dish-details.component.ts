@@ -61,9 +61,9 @@ export class DishDetailsComponent implements OnInit, OnDestroy{
   }
 
   navigateToAlternativeDetails(): void {
-      localStorage.setItem('homeDishId', this.dish.homeDishId)
-      this.router.navigate(['/alternative-details'], { queryParams: { 
-        isAlternative: true,
-      }});
+    localStorage.setItem('homeDishId', this.dish.homeDishId)
+    this.router.navigate(['/alternative-details'], { queryParams: { 
+      isAlternative: true,
+    }});
   }
 }
